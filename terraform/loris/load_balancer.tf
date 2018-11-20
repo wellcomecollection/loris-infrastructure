@@ -1,4 +1,4 @@
-resource "aws_alb" "public_services" {
+resource "aws_alb" "loris" {
   # This name can only contain alphanumerics and hyphens
   name = "${replace("${var.namespace}", "_", "-")}"
 
@@ -7,8 +7,8 @@ resource "aws_alb" "public_services" {
 }
 
 resource "aws_alb_listener" "https" {
-  load_balancer_arn = "${aws_alb.public_services.id}"
-  port              = "443"
+  load_balancer_arn = "${aws_alb.loris.id}"
+  port              = "${local.listener_port}"
   protocol          = "HTTPS"
   ssl_policy        = "ELBSecurityPolicy-2015-05"
   certificate_arn   = "${data.aws_acm_certificate.certificate.arn}"
@@ -50,12 +50,16 @@ resource "aws_alb_listener_rule" "robots_is_404" {
   }
 }
 
+data "aws_lb_target_group" "loris" {
+  name = "${module.service.target_group_name}"
+}
+
 resource "aws_alb_listener_rule" "https" {
   listener_arn = "${aws_alb_listener.https.arn}"
 
   action {
     type             = "forward"
-    target_group_arn = "${module.service.target_group_arn}"
+    target_group_arn = "${data.aws_lb_target_group.loris.arn}"
   }
 
   condition {

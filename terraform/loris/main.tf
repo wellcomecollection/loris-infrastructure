@@ -8,7 +8,7 @@ resource "aws_ecs_cluster" "cluster" {
 }
 
 module "task" {
-  source = "git::https://github.com/wellcometrust/terraform.git//ecs/modules/task/prebuilt/container_with_sidecar+ebs?ref=v11.4.1"
+  source = "git::https://github.com/wellcometrust/terraform.git//ecs/modules/task/prebuilt/container_with_sidecar+ebs?ref=v16.1.6"
 
   aws_region = "${var.aws_region}"
   task_name  = "${var.namespace}"
@@ -39,7 +39,7 @@ module "task" {
 }
 
 module "service" {
-  source = "git::https://github.com/wellcometrust/terraform.git//ecs/modules/service/prebuilt/load_balanced?ref=v11.4.1"
+  source = "git::https://github.com/wellcometrust/terraform.git//ecs/modules/service/prebuilt/load_balanced?ref=v16.1.6"
 
   service_name       = "${var.namespace}"
   task_desired_count = "${var.task_desired_count}"
@@ -69,11 +69,15 @@ module "service" {
 
   healthcheck_path = "${var.healthcheck_path}"
 
+  target_group_protocol = "HTTP"
+  listener_port         = "80"
+  lb_arn                = "${aws_alb.loris.arn}"
+
   launch_type = "EC2"
 }
 
 module "cache_cleaner_task" {
-  source = "git::https://github.com/wellcometrust/terraform.git//ecs/modules/task/prebuilt/single_container+ebs?ref=v11.4.1"
+  source = "git::https://github.com/wellcometrust/terraform.git//ecs/modules/task/prebuilt/single_container+ebs?ref=v16.1.6"
 
   aws_region = "${var.aws_region}"
   task_name  = "${var.namespace}_cache_cleaner"
@@ -98,7 +102,7 @@ module "cache_cleaner_task" {
 }
 
 module "cache_cleaner_service" {
-  source = "git::https://github.com/wellcometrust/terraform.git//ecs/modules/service/prebuilt/daemon?ref=v11.4.1"
+  source = "git::https://github.com/wellcometrust/terraform.git//ecs/modules/service/prebuilt/daemon?ref=v16.1.6"
 
   service_name   = "${var.namespace}_cache_cleaner"
   ecs_cluster_id = "${aws_ecs_cluster.cluster.id}"

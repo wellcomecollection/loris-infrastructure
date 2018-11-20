@@ -11,7 +11,6 @@ variable "public_subnets" {
 }
 
 variable "key_name" {}
-variable "ssh_controlled_ingress_sg" {}
 variable "certificate_domain" {}
 
 variable "healthcheck_path" {

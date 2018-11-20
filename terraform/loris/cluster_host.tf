@@ -1,11 +1,11 @@
 module "cluster_host" {
-  source = "git::https://github.com/wellcometrust/terraform.git//ecs/modules/ec2/prebuilt/ebs?ref=v11.4.1"
+  source = "git::https://github.com/wellcometrust/terraform.git//ecs/modules/ec2/prebuilt/ebs?ref=v16.1.5"
 
   cluster_name = "${aws_ecs_cluster.cluster.name}"
   vpc_id       = "${var.vpc_id}"
 
   asg_name                    = "${var.namespace}"
-  ssh_ingress_security_groups = ["${var.ssh_controlled_ingress_sg}"]
+  ssh_ingress_security_groups = []
 
   subnets  = "${var.private_subnets}"
   key_name = "${var.key_name}"

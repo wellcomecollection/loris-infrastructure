@@ -1,17 +1,16 @@
-module "loris_service" {
-  source = "service"
+module "loris" {
+  source = "loris"
 
-  namespace = "loris-delta"
+  namespace = "loris"
 
   certificate_domain = "api.wellcomecollection.org"
 
   aws_region = "${var.aws_region}"
 
-  vpc_id          = "${local.vpc_id}"
-  private_subnets = "${local.private_subnets}"
-  public_subnets  = "${local.public_subnets}"
+  vpc_id          = "${local.vpc_id_new}"
+  private_subnets = "${local.private_subnets_new}"
+  public_subnets  = "${local.public_subnets_new}"
 
-  ssh_controlled_ingress_sg = "${local.ssh_controlled_ingress_sg}"
   key_name                  = "${var.key_name}"
 
   sidecar_container_image = "${module.ecr_nginx_loris_delta.repository_url}:${var.release_ids["nginx_loris-delta"]}"
