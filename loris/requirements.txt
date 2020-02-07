@@ -18,7 +18,7 @@ olefile==0.44             # via pillow
 pillow==4.3.0
 pycparser==2.18           # via cffi
 pyjwt==1.5.3
-requests==2.18.4
+requests==2.20.0
 six==1.11.0               # via cryptography, tenacity
 tenacity==4.9.0
 urllib3==1.22             # via requests
