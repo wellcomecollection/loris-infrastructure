@@ -22,4 +22,4 @@ requests==2.18.4
 six==1.11.0               # via cryptography, tenacity
 tenacity==4.9.0
 urllib3==1.22             # via requests
-werkzeug==0.12.2
+werkzeug==0.15.3
