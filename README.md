@@ -2,6 +2,8 @@
 
 This project has the Docker image and infrastructure for our [Loris][loris] deployment.
 
+[![Build Status](https://travis-ci.org/wellcomecollection/loris-infrastructure.svg?branch=master)](https://travis-ci.org/wellcomecollection/loris-infrastructure)
+
 [loris]: https://github.com/loris-imageserver/loris
 
 ## Updating the installed version of Loris
