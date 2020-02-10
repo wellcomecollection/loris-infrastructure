@@ -1,5 +1,7 @@
 ROOT = $(shell git rev-parse --show-toplevel)
 include $(ROOT)/makefiles/functions.Makefile
+include $(ROOT)/makefiles/formatting.Makefile
+
 
 STACK_ROOT 	 = $(ROOT)
 
