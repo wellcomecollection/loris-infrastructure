@@ -1,0 +1,35 @@
+language: "sh"
+
+sudo: "required"
+
+services:
+  - "docker"
+
+dist: "trusty"
+
+branches:
+  only:
+    - "master"
+
+script:
+  - ./run_travis.sh
+
+jobs:
+  include:
+    - stage: preflight
+      env: TASK=travis-format
+
+    - stage: test
+      env: TASK=loris-build
+
+    - stage: publish
+      env: TASK=loris-publish
+
+stages:
+  - name: preflight
+
+  - name: test
+    if: type != push
+
+  - name: publish
+    if: type = push

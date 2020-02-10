@@ -1,6 +1,5 @@
 FROM ubuntu:16.04
 
-
 # Install base Python and uWSGI (web server) dependencies
 RUN apt-get update && \
     apt-get install --yes python3 python3-pip uwsgi uwsgi-plugin-python3 && \
@@ -22,7 +21,6 @@ ENV LORIS_COMMIT 44f8459f3ff2d549c564631d17cc1e54f5c02066
 COPY requirements.txt /
 COPY install_loris.sh /install_loris.sh
 RUN /install_loris.sh
-
 
 # This is an sRGB color profile downloaded from
 # http://www.color.org/srgbprofiles.xalter

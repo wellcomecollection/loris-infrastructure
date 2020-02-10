@@ -1,7 +1,7 @@
 ROOT = $(shell git rev-parse --show-toplevel)
 include $(ROOT)/makefiles/functions.Makefile
 
-STACK_ROOT 	= loris
+STACK_ROOT 	 = $(ROOT)
 
 SBT_APPS 	 =
 SBT_SSM_APPS =
@@ -17,9 +17,9 @@ $(val $(call stack_setup))
 
 # TODO: Flip this to using micktwomey/pip-tools when that's updated
 # with a newer version of pip-tools.
-$(ROOT)/loris/loris/requirements.txt: $(ROOT)/loris/loris/requirements.in
+$(ROOT)/loris/requirements.txt: $(ROOT)/loris/requirements.in
 	docker run --rm \
-		--volume $(ROOT)/loris/loris:/data \
+		--volume $(ROOT)/loris:/data \
 		wellcome/build_tooling:latest \
 		pip-compile
 
