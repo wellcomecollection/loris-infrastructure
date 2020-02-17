@@ -113,7 +113,7 @@ resource "aws_ecs_service" "cache_cleaner_service" {
 }
 
 module "iam" {
-  source = "git::github.com/wellcometrust/terraform.git//ecs/modules/service/modules/iam?ref=v17.0.0"
+  source = "github.com/wellcomecollection/terraform-aws-ecs-service.git//service/iam_role?ref=v1.2.0"
 
-  service_name = "${aws_ecs_service.cache_cleaner_service.name}"
+  service_name = aws_ecs_service.cache_cleaner_service.name
 }
