@@ -9,8 +9,6 @@ module "container_definition" {
 
   env_vars = "${var.env_vars}"
 
-  log_group_prefix = "${var.log_group_prefix}"
-
   cpu    = "${var.cpu}"
   memory = "${var.memory}"
 

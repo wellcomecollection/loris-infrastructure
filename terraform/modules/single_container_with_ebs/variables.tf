@@ -6,11 +6,6 @@ variable "env_vars" {
   default     = {}
 }
 
-variable "log_group_prefix" {
-  description = "Cloudwatch log group name prefix"
-  default     = "ecs"
-}
-
 variable "container_image" {}
 
 variable "container_port" {

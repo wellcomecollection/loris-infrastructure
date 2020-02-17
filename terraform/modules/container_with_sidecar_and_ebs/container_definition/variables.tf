@@ -2,11 +2,6 @@ variable "aws_region" {}
 
 variable "task_name" {}
 
-variable "log_group_prefix" {
-  description = "Cloudwatch log group name prefix"
-  default     = "ecs"
-}
-
 # App
 
 variable "app_container_image" {}

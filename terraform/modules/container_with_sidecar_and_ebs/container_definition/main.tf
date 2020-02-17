@@ -7,6 +7,8 @@ locals {
 
   app_container_name     = "app"
   sidecar_container_name = "sidecar"
+
+  log_group_prefix = "ecs"
 }
 
 data "template_file" "definition" {
@@ -14,7 +16,7 @@ data "template_file" "definition" {
 
   vars = {
     log_group_region = "${var.aws_region}"
-    log_group_prefix = "${var.log_group_prefix}"
+    log_group_prefix = local.log_group_prefix
 
     # App vars
     app_log_group_name = "${module.app_log_group.name}"

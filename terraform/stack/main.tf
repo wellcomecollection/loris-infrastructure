@@ -16,8 +16,6 @@ module "task" {
   cpu    = "${var.cpu}"
   memory = "${var.memory}"
 
-  log_group_prefix = "${var.log_group_prefix}"
-
   app_container_image = "${var.app_container_image}"
   app_container_port  = "${var.app_container_port}"
 
@@ -76,8 +74,6 @@ module "cache_cleaner_task" {
 
   aws_region = "${var.aws_region}"
   task_name  = "${var.namespace}_cache_cleaner"
-
-  log_group_prefix = "${var.log_group_prefix}"
 
   ebs_host_path      = "/ebs/loris"
   ebs_container_path = "/data"

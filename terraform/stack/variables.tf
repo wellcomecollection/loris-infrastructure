@@ -16,11 +16,6 @@ variable "healthcheck_path" {
   default = "/image/"
 }
 
-variable "log_group_prefix" {
-  description = "Cloudwatch log group name prefix"
-  default     = "ecs"
-}
-
 variable "asg_min" {
   description = "Min number of instances"
   default     = 0

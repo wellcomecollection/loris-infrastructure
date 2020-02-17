@@ -5,8 +5,6 @@ module "container_definition" {
 
   task_name = "${var.task_name}"
 
-  log_group_prefix = "${var.log_group_prefix}"
-
   app_cpu    = "${var.app_cpu}"
   app_memory = "${var.app_memory}"
 

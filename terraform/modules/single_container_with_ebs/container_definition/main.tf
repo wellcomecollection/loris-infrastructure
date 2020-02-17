@@ -3,6 +3,8 @@ locals {
   log_group_name = "${var.task_name}"
   container_name = "app"
   command        = "${jsonencode(var.command)}"
+
+  log_group_prefix = "ecs"
 }
 
 data "template_file" "definition" {
@@ -11,7 +13,7 @@ data "template_file" "definition" {
   vars = {
     log_group_region = "${var.aws_region}"
     log_group_name   = "${module.log_group.name}"
-    log_group_prefix = "${var.log_group_prefix}"
+    log_group_prefix = local.log_group_prefix
 
     container_image = "${var.container_image}"
     container_name  = "${local.container_name}"

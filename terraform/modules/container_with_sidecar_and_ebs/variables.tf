@@ -1,10 +1,5 @@
 variable "task_name" {}
 
-variable "log_group_prefix" {
-  description = "Cloudwatch log group name prefix"
-  default     = "ecs"
-}
-
 variable "cpu" {}
 variable "memory" {}
 
