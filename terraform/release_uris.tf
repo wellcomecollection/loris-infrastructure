@@ -1,6 +1,6 @@
 locals {
-  loris_image = "${module.images.services["loris"]}"
-  nginx_image = "${module.images.services["nginx_loris-delta"]}"
+  loris_image = module.images.services["loris"]
+  nginx_image = module.images.services["nginx_loris-delta"]
 }
 
 module "images" {

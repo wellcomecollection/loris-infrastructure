@@ -47,7 +47,7 @@ resource "aws_cloudfront_distribution" "loris" {
   price_class = "PriceClass_100"
 
   viewer_certificate {
-    acm_certificate_arn      = "${data.aws_acm_certificate.iiif_wc_org.arn}"
+    acm_certificate_arn      = data.aws_acm_certificate.iiif_wc_org.arn
     minimum_protocol_version = "TLSv1"
     ssl_support_method       = "sni-only"
   }
@@ -60,7 +60,7 @@ resource "aws_cloudfront_distribution" "loris" {
 
   logging_config {
     include_cookies = false
-    bucket          = "${local.cloudfront_logs_bucket_domain_name}"
+    bucket          = local.cloudfront_logs_bucket_domain_name
     prefix          = "loris"
   }
 }

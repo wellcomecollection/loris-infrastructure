@@ -5,14 +5,14 @@ module "loris-2019_01_30" {
 
   certificate_domain = "api.wellcomecollection.org"
 
-  aws_region = "${var.aws_region}"
+  aws_region = var.aws_region
 
-  vpc_id          = "${local.vpc_id}"
-  private_subnets = "${local.private_subnets}"
-  public_subnets  = "${local.public_subnets}"
+  vpc_id          = local.vpc_id
+  private_subnets = local.private_subnets
+  public_subnets  = local.public_subnets
 
-  sidecar_container_image = "${local.nginx_image}"
-  app_container_image     = "${local.loris_image}"
+  sidecar_container_image = local.nginx_image
+  app_container_image     = local.loris_image
 
   asg_desired        = 4
   desired_task_count = 4

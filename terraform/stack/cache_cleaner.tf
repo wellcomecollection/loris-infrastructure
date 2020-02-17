@@ -33,7 +33,7 @@ module "cache_cleaner_task" {
 
 resource "aws_ecs_service" "cache_cleaner_service" {
   name            = "${var.namespace}_cache_cleaner_daemon"
-  cluster         = "${aws_ecs_cluster.cluster.id}"
+  cluster         = aws_ecs_cluster.cluster.id
   task_definition = module.cache_cleaner_task.arn
 
   launch_type         = "EC2"
@@ -43,7 +43,7 @@ resource "aws_ecs_service" "cache_cleaner_service" {
   deployment_maximum_percent         = 100
 
   network_configuration {
-    subnets          = "${var.private_subnets}"
+    subnets          = var.private_subnets
     security_groups  = []
     assign_public_ip = false
   }
