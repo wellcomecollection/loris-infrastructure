@@ -19,7 +19,7 @@ data "template_file" "definition" {
     log_group_prefix = local.log_group_prefix
 
     # App vars
-    app_log_group_name = "${module.app_log_group.name}"
+    app_log_group_name = aws_cloudwatch_log_group.app.name
 
     app_container_image = "${var.app_container_image}"
     app_container_name  = "${local.app_container_name}"
@@ -33,7 +33,7 @@ data "template_file" "definition" {
     app_mount_points = "${local.app_mount_points}"
 
     # Sidecar vars
-    sidecar_log_group_name = "${module.sidecar_log_group.name}"
+    sidecar_log_group_name = aws_cloudwatch_log_group.sidecar.name
 
     sidecar_container_image = "${var.sidecar_container_image}"
     sidecar_container_name  = "${local.sidecar_container_name}"
@@ -51,9 +51,10 @@ data "template_file" "definition" {
 
 # App
 
-module "app_log_group" {
-  source    = "../../log_group"
-  task_name = "${var.task_name}"
+resource "aws_cloudwatch_log_group" "app" {
+  name = "${local.log_group_prefix}/${var.task_name}"
+
+  retention_in_days = 7
 }
 
 module "app_env_vars" {
@@ -63,9 +64,10 @@ module "app_env_vars" {
 
 # Sidecar
 
-module "sidecar_log_group" {
-  source    = "../../log_group"
-  task_name = "sidecar_${var.task_name}"
+resource "aws_cloudwatch_log_group" "sidecar" {
+  name = "${local.log_group_prefix}/sidecar_${var.task_name}"
+
+  retention_in_days = 7
 }
 
 module "sidecar_env_vars" {

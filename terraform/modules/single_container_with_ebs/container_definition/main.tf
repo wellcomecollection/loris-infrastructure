@@ -12,7 +12,7 @@ data "template_file" "definition" {
 
   vars = {
     log_group_region = "${var.aws_region}"
-    log_group_name   = "${module.log_group.name}"
+    log_group_name   = aws_cloudwatch_log_group.app.name
     log_group_prefix = local.log_group_prefix
 
     container_image = "${var.container_image}"
@@ -36,10 +36,10 @@ module "port_mappings" {
   container_port = "${var.task_port}"
 }
 
-module "log_group" {
-  source = "../../log_group"
+resource "aws_cloudwatch_log_group" "app" {
+  name = "${local.log_group_prefix}/${var.task_name}"
 
-  task_name = "${var.task_name}"
+  retention_in_days = 7
 }
 
 module "env_vars" {
