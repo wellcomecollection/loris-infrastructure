@@ -3,5 +3,5 @@ output "ssh_controlled_ingress_sg" {
 }
 
 output "ebs_host_path" {
-  value = "${var.ebs_host_path}"
+  value = "${local.ebs_host_path}"
 }

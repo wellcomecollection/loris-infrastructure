@@ -7,24 +7,26 @@ variable "asg_name" {
 variable "asg_min" {
   description = "Minimum number of instances"
   type        = number
-  default     = 1
 }
 
 variable "asg_desired" {
   description = "Desired number of instances"
   type        = number
-  default     = 1
 }
 
 variable "asg_max" {
   description = "Max number of instances"
   type        = number
-  default     = 2
 }
 
 variable "instance_type" {
-  default     = "t2.small"
   description = "AWS instance type"
+}
+
+variable "ebs_size" {}
+
+variable "ebs_volume_type" {
+  default = "standard"
 }
 
 variable "subnets" {
@@ -32,41 +34,3 @@ variable "subnets" {
 }
 
 variable "vpc_id" {}
-
-variable "image_id" {
-  default = "ami-c91624b0"
-}
-
-variable "key_name" {
-  description = "SSH key name for SSH access.  Leave blank if not using SSH."
-  default     = ""
-}
-
-variable "controlled_access_cidr_ingress" {
-  type        = list(string)
-  default     = []
-  description = "CIDR for SSH access to EC2 instances"
-}
-
-variable "custom_security_groups" {
-  type    = list(string)
-  default = []
-}
-
-variable "ssh_ingress_security_groups" {
-  type    = list(string)
-  default = []
-}
-
-variable "ebs_size" {
-  # 1GB
-  default = "1"
-}
-
-variable "ebs_host_path" {
-  default = "/ebs"
-}
-
-variable "ebs_volume_type" {
-  default = "standard"
-}
