@@ -55,7 +55,7 @@ resource "aws_alb_listener_rule" "https" {
 
   action {
     type             = "forward"
-    target_group_arn = module.target_group.arn
+    target_group_arn = aws_alb_target_group.http.arn
   }
 
   condition {

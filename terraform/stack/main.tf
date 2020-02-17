@@ -77,21 +77,7 @@ module "service" {
 
   launch_type = "EC2"
 
-  target_group_arn = module.target_group.arn
+  target_group_arn = aws_alb_target_group.http.arn
   container_name   = local.sidecar_container_name
   container_port   = var.sidecar_container_port
-}
-
-module "target_group" {
-  source = "../modules/target_group"
-
-  service_name = var.namespace
-
-  vpc_id = var.vpc_id
-  lb_arn = aws_alb.loris.arn
-
-  listener_port  = 80
-  container_port = var.sidecar_container_port
-
-  healthcheck_path = var.healthcheck_path
 }
