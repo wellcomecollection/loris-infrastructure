@@ -3,7 +3,7 @@ locals {
 }
 
 resource "aws_launch_configuration" "launch_config" {
-  security_groups = module.security_groups.instance_security_groups
+  security_groups = [aws_security_group.full_egress.id]
 
   key_name                    = ""
   image_id                    = var.image_id
