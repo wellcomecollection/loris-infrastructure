@@ -1,5 +1,5 @@
 output "asg_name" {
-  value = module.cloudformation_stack.asg_name
+  value = aws_cloudformation_stack.ecs_asg.outputs["AsgName"]
 }
 
 output "instance_profile_name" {

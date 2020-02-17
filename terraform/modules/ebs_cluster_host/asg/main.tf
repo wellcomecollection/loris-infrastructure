@@ -1,15 +1,3 @@
-module "cloudformation_stack" {
-  source = "./asg"
-
-  subnet_list        = var.subnets
-  asg_name           = var.name
-  launch_config_name = module.launch_config.name
-
-  asg_max     = var.asg_max
-  asg_desired = var.asg_desired
-  asg_min     = var.asg_min
-}
-
 module "launch_config" {
   source = "./launch_config"
 
