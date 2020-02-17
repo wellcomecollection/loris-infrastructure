@@ -3,11 +3,11 @@ output "asg_name" {
 }
 
 output "instance_profile_name" {
-  value = module.instance_profile.name
+  value = aws_iam_instance_profile.instance_profile.name
 }
 
 output "instance_profile_role_name" {
-  value = module.instance_profile.role_name
+  value = aws_iam_role.instance_role.name
 }
 
 output "ssh_controlled_ingress_sg" {

@@ -8,8 +8,3 @@ module "security_groups" {
   controlled_access_security_groups = []
   custom_security_groups            = []
 }
-
-module "instance_profile" {
-  source = "./instance_profile"
-  name   = var.name
-}
