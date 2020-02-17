@@ -55,7 +55,7 @@ resource "aws_alb_listener_rule" "https" {
 
   action {
     type             = "forward"
-    target_group_arn = "${module.service.target_group_arn}"
+    target_group_arn = module.target_group.arn
   }
 
   condition {

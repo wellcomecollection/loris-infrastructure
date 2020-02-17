@@ -15,7 +15,7 @@ module "loris-2019_01_30" {
   app_container_image     = "${local.loris_image}"
 
   asg_desired        = 4
-  task_desired_count = 4
+  desired_task_count = 4
 
   # The cache cleaner is published from the dockerfiles repo, and so is versioned
   # separately from ECR.  We pin it to a specific release so it can't change

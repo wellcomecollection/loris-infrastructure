@@ -44,8 +44,7 @@ variable "memory" {
   type = number
 }
 
-variable "task_desired_count" {
-  default = 4
+variable "desired_task_count" {
   type = number
 }
 
