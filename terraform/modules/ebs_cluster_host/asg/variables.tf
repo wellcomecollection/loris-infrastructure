@@ -5,73 +5,38 @@ variable "name" {
 variable "asg_min" {
   description = "Minimum number of instances"
   type        = number
-  default     = 1
 }
 
 variable "asg_desired" {
   description = "Desired number of instances"
   type        = number
-  default     = "1"
 }
 
 variable "asg_max" {
   description = "Max number of instances"
   type        = number
-  default     = 2
-}
-
-variable "subnet_list" {
-  type = list(string)
 }
 
 variable "instance_type" {
-  default     = "t2.small"
   description = "AWS instance type"
 }
 
-variable "key_name" {
-  description = "SSH key pair name for instance sign-in"
-}
+variable "ebs_size" {}
 
-variable "user_data" {
-  description = "User data for ec2 container hosts"
-  default     = ""
-}
-
-variable "associate_public_ip_address" {
-  description = "Associate public IP address?"
-  default     = true
-}
-
-variable "vpc_id" {
-  description = "VPC for EC2 autoscaling group security group"
-}
+variable "ebs_volume_type" {}
 
 variable "image_id" {
   description = "ID of the AMI to use on the instances"
 }
 
-variable "controlled_access_cidr_ingress" {
-  type        = list(string)
-  default     = []
-  description = "CIDR for SSH access to EC2 instances"
+variable "user_data" {
+  description = "User data for EC2 container hosts"
 }
 
-variable "ssh_ingress_security_groups" {
-  type    = list(string)
-  default = []
+variable "subnets" {
+  type = list(string)
 }
 
-variable "custom_security_groups" {
-  type    = list(string)
-  default = []
-}
-
-variable "ebs_size" {
-  # 1GB
-  default = "1"
-}
-
-variable "ebs_volume_type" {
-  default = "standard"
+variable "vpc_id" {
+  description = "VPC for EC2 autoscaling group security group"
 }
