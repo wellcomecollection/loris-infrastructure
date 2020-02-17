@@ -1,5 +1,5 @@
 module "iam" {
-  source = "./iam"
+  source = "github.com/wellcomecollection/terraform-aws-ecs-service.git//service/iam_role?ref=v1.2.0"
 
   service_name = "${var.service_name}"
 }
