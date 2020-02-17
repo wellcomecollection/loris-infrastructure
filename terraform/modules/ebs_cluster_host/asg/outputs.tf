@@ -10,10 +10,6 @@ output "instance_profile_role_name" {
   value = aws_iam_role.instance_role.name
 }
 
-output "ssh_controlled_ingress_sg" {
-  value = module.security_groups.ssh_controlled_ingress
-}
-
 output "ebs_device_name" {
   value = local.ebs_device_name
 }
