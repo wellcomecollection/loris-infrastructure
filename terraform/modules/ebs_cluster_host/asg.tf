@@ -30,10 +30,3 @@ data "template_file" "userdata" {
     ebs_host_path   = local.ebs_host_path
   }
 }
-
-module "instance_policy" {
-  source = "./instance_role_policy"
-
-  cluster_name               = var.cluster_name
-  instance_profile_role_name = module.asg.instance_profile_role_name
-}
