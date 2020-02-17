@@ -7,31 +7,44 @@ resource "aws_ecs_cluster" "cluster" {
   name = "${var.namespace}"
 }
 
+locals {
+  sidecar_container_name = "sidecar"
+}
+
 module "task" {
-  source = "../modules/container_with_sidecar_and_ebs"
+  source = "github.com/wellcomecollection/terraform-aws-ecs-service.git//task_definition/container_with_sidecar?ref=8c79ba9235f5d9384af2126825a9eb1c80f7895c"
 
-  aws_region = "${var.aws_region}"
-  task_name  = "${var.namespace}"
+  task_name = var.namespace
 
-  cpu    = "${var.cpu}"
-  memory = "${var.memory}"
+  cpu    = var.app_cpu + var.sidecar_cpu
+  memory = var.app_memory + var.sidecar_memory
 
-  app_container_image = "${var.app_container_image}"
-  app_container_port  = "${var.app_container_port}"
+  use_awslogs = true
 
-  app_cpu    = "${var.app_cpu}"
-  app_memory = "${var.app_memory}"
+  app_container_image = var.app_container_image
+  app_container_port  = var.app_container_port
+  app_cpu             = var.app_cpu
+  app_memory          = var.app_memory
 
-  sidecar_container_image = "${var.sidecar_container_image}"
-  sidecar_container_port  = "${var.sidecar_container_port}"
+  app_mount_points = [
+    {
+      sourceVolume  = "ebs"
+      containerPath = var.ebs_container_path
+    },
+  ]
 
-  sidecar_cpu    = "${var.sidecar_cpu}"
-  sidecar_memory = "${var.sidecar_memory}"
+  sidecar_container_image = var.sidecar_container_image
+  sidecar_container_port  = var.sidecar_container_port
+  sidecar_cpu             = var.sidecar_cpu
+  sidecar_memory          = var.sidecar_memory
+  sidecar_container_name  = local.sidecar_container_name
 
-  ebs_host_path      = "/ebs/loris"
-  ebs_container_path = "${var.ebs_container_path}"
+  ebs_volume_name = "ebs"
+  ebs_host_path   = "/ebs/loris"
 
-  sidecar_is_proxy = "true"
+  launch_type = "EC2"
+
+  aws_region = var.aws_region
 }
 
 module "service" {
@@ -42,7 +55,7 @@ module "service" {
 
   desired_task_count = max(2, var.desired_task_count)
 
-  task_definition_arn = module.task.task_definition_arn
+  task_definition_arn = module.task.arn
 
   subnets = var.private_subnets
 
@@ -65,7 +78,7 @@ module "service" {
   launch_type = "EC2"
 
   target_group_arn = module.target_group.arn
-  container_name   = module.task.sidecar_task_name
+  container_name   = local.sidecar_container_name
   container_port   = var.sidecar_container_port
 }
 

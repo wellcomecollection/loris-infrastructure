@@ -34,16 +34,6 @@ variable "asg_max" {
   type = number
 }
 
-variable "cpu" {
-  default = 3960
-  type = number
-}
-
-variable "memory" {
-  default = 7350
-  type = number
-}
-
 variable "desired_task_count" {
   type = number
 }
@@ -55,7 +45,7 @@ variable "instance_type" {
 variable "app_container_image" {}
 
 variable "app_container_port" {
-  default = "8888"
+  default = 8888
 }
 
 variable "app_cpu" {
@@ -71,7 +61,7 @@ variable "app_memory" {
 variable "sidecar_container_image" {}
 
 variable "sidecar_container_port" {
-  default = "9000"
+  default = 9000
 }
 
 variable "sidecar_cpu" {
