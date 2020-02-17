@@ -18,7 +18,7 @@ resource "aws_cloudwatch_metric_alarm" "cloudfront_4xx_alarm" {
   threshold           = "2500"
   treat_missing_data  = "breaching"
 
-  dimensions {
+  dimensions = {
     DistributionId = "${aws_cloudfront_distribution.loris.id}"
     Region         = "Global"
   }

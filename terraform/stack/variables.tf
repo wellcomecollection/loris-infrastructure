@@ -3,11 +3,11 @@ variable "namespace" {}
 variable "aws_region" {}
 
 variable "private_subnets" {
-  type = "list"
+  type = list(string)
 }
 
 variable "public_subnets" {
-  type = "list"
+  type = list(string)
 }
 
 variable "certificate_domain" {}
@@ -23,29 +23,35 @@ variable "log_group_prefix" {
 
 variable "asg_min" {
   description = "Min number of instances"
-  default     = "0"
+  default     = 0
+  type = number
 }
 
 variable "asg_desired" {
   description = "Desired number of instances"
-  default     = "4"
+  default     = 4
+  type = number
 }
 
 variable "asg_max" {
   description = "Max number of instances"
-  default     = "4"
+  default     = 4
+  type = number
 }
 
 variable "cpu" {
-  default = "3960"
+  default = 3960
+  type = number
 }
 
 variable "memory" {
-  default = "7350"
+  default = 7350
+  type = number
 }
 
 variable "task_desired_count" {
-  default = "4"
+  default = 4
+  type = number
 }
 
 variable "instance_type" {
@@ -59,11 +65,13 @@ variable "app_container_port" {
 }
 
 variable "app_cpu" {
-  default = "2948"
+  default = 2948
+  type = number
 }
 
 variable "app_memory" {
-  default = "6144"
+  default = 6144
+  type = number
 }
 
 variable "sidecar_container_image" {}
@@ -73,11 +81,13 @@ variable "sidecar_container_port" {
 }
 
 variable "sidecar_cpu" {
-  default = "128"
+  default = 128
+  type = number
 }
 
 variable "sidecar_memory" {
-  default = "128"
+  default = 128
+  type = number
 }
 
 variable "ebs_container_path" {
@@ -93,19 +103,23 @@ variable "ebs_volume_type" {
 }
 
 variable "ebs_cache_cleaner_daemon_cpu" {
-  default = "128"
+  default = 128
+  type = number
 }
 
 variable "ebs_cache_cleaner_daemon_memory" {
-  default = "64"
+  default = 64
+  type = number
 }
 
 variable "ebs_cache_cleaner_daemon_max_age_in_days" {
-  default = "30"
+  default = 30
+  type = number
 }
 
 variable "ebs_cache_cleaner_daemon_max_size_in_gb" {
-  default = "160"
+  default = 160
+  type = number
 }
 
 variable "ebs_cache_cleaner_daemon_clean_interval" {

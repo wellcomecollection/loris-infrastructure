@@ -8,7 +8,7 @@ resource "aws_ecs_cluster" "cluster" {
 }
 
 module "task" {
-  source = "git::https://github.com/wellcometrust/terraform.git//ecs/modules/task/prebuilt/container_with_sidecar+ebs?ref=v17.0.0"
+  source = "../modules/container_with_sidecar_and_ebs"
 
   aws_region = "${var.aws_region}"
   task_name  = "${var.namespace}"
@@ -37,7 +37,7 @@ module "task" {
 }
 
 module "service" {
-  source = "git::https://github.com/wellcometrust/terraform.git//ecs/modules/service/prebuilt/rest/http?ref=v17.0.0"
+  source = "../modules/http_service"
 
   service_name       = "${var.namespace}"
   task_desired_count = "${var.task_desired_count}"
@@ -54,9 +54,7 @@ module "service" {
 
   vpc_id = "${var.vpc_id}"
 
-  subnets = [
-    "${var.private_subnets}",
-  ]
+  subnets = "${var.private_subnets}"
 
   namespace_id = "${aws_service_discovery_private_dns_namespace.namespace.id}"
 
@@ -74,7 +72,7 @@ module "service" {
 }
 
 module "cache_cleaner_task" {
-  source = "git::https://github.com/wellcometrust/terraform.git//ecs/modules/task/prebuilt/single_container+ebs?ref=v17.0.0"
+  source = "../modules/single_container_with_ebs"
 
   aws_region = "${var.aws_region}"
   task_name  = "${var.namespace}_cache_cleaner"
@@ -94,8 +92,6 @@ module "cache_cleaner_task" {
     MAX_AGE        = "${var.ebs_cache_cleaner_daemon_max_age_in_days}"
     MAX_SIZE       = "${var.ebs_cache_cleaner_daemon_max_size_in_gb}G"
   }
-
-  env_vars_length = 3
 }
 
 resource "aws_ecs_service" "cache_cleaner_service" {
@@ -109,8 +105,8 @@ resource "aws_ecs_service" "cache_cleaner_service" {
   deployment_minimum_healthy_percent = 0
   deployment_maximum_percent         = 100
 
-  network_configuration = {
-    subnets          = ["${var.private_subnets}"]
+  network_configuration {
+    subnets          = "${var.private_subnets}"
     security_groups  = []
     assign_public_ip = false
   }
@@ -118,7 +114,6 @@ resource "aws_ecs_service" "cache_cleaner_service" {
 
 module "iam" {
   source = "git::github.com/wellcometrust/terraform.git//ecs/modules/service/modules/iam?ref=v17.0.0"
-  source = "../../modules/iam"
 
   service_name = "${aws_ecs_service.cache_cleaner_service.name}"
 }
