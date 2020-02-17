@@ -31,10 +31,10 @@ resource "aws_cloudwatch_metric_alarm" "cloudfront_4xx_alarm" {
   // It should be re-enabled eventually: https://github.com/wellcometrust/platform/issues/4170
   actions_enabled = false
 
-  provider = "aws.us_east_1"
+  provider = aws.us_east_1
 }
 
 resource "aws_sns_topic" "cloudfront_errors" {
   name     = "cloudfront_errors"
-  provider = "aws.us_east_1"
+  provider = aws.us_east_1
 }
