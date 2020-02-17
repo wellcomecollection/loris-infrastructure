@@ -8,10 +8,10 @@ Content-Type: text/cloud-boothook; charset="us-ascii"
 cloud-init-per once mkdir_ebs mkdir -p ${ebs_host_path}
 
 # Format ebs volume
-cloud-init-per once format_ebs mkfs -t ext4 ${ebs_volume_id}
+cloud-init-per once format_ebs mkfs -t ext4 ${ebs_device_name}
 
 # Add /ebs to fstab
-cloud-init-per once mount_ebs echo -e '${ebs_volume_id} ${ebs_host_path} ext4 defaults,nofail 0 2' >> /etc/fstab
+cloud-init-per once mount_ebs echo -e '${ebs_device_name} ${ebs_host_path} ext4 defaults,nofail 0 2' >> /etc/fstab
 
 # Mount all
 mount -a
@@ -24,7 +24,7 @@ Content-Type: text/x-shellscript; charset="us-ascii"
 cat << EOF > /etc/ecs/ecs.config
 
 ECS_CLUSTER=${cluster_name}
-ECS_INSTANCE_ATTRIBUTES={"ebs.volume":"${ebs_volume_id}"}
+ECS_INSTANCE_ATTRIBUTES={"ebs.volume":"${ebs_device_name}"}
 
 EOF
 --==BOUNDARY==--

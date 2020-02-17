@@ -1,19 +1,3 @@
-module "launch_config" {
-  source = "./launch_config"
-
-  key_name              = ""
-  image_id              = var.image_id
-  instance_type         = var.instance_type
-  instance_profile_name = module.instance_profile.name
-  user_data             = var.user_data
-
-  associate_public_ip_address = true
-  instance_security_groups    = module.security_groups.instance_security_groups
-
-  ebs_size        = var.ebs_size
-  ebs_volume_type = var.ebs_volume_type
-}
-
 module "security_groups" {
   source = "./security_groups"
 

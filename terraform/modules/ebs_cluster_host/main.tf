@@ -25,9 +25,9 @@ data "template_file" "userdata" {
   template = file("${path.module}/ebs.tpl")
 
   vars = {
-    cluster_name  = var.cluster_name
-    ebs_volume_id = module.asg.ebs_volume_id
-    ebs_host_path = local.ebs_host_path
+    cluster_name    = var.cluster_name
+    ebs_device_name = module.asg.ebs_device_name
+    ebs_host_path   = local.ebs_host_path
   }
 }
 
