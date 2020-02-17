@@ -13,8 +13,6 @@ module "container_definition" {
   memory = "${var.memory}"
 
   mount_points = "${module.task_definition.mount_points}"
-
-  task_port = "${var.container_port}"
 }
 
 module "task_definition" {

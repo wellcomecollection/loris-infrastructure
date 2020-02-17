@@ -8,10 +8,6 @@ variable "env_vars" {
 
 variable "container_image" {}
 
-variable "container_port" {
-  default = "false"
-}
-
 variable "cpu" {
   default = 512
 }

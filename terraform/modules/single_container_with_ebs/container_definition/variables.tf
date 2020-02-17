@@ -8,10 +8,6 @@ variable "env_vars" {
 
 variable "task_name" {}
 
-variable "task_port" {
-  default = "false"
-}
-
 variable "container_image" {}
 
 variable "cpu" {}

@@ -9,7 +9,3 @@ output "task_role_name" {
 output "task_name" {
   value = "${module.container_definition.container_name}"
 }
-
-output "task_port" {
-  value = "${var.container_port}"
-}
