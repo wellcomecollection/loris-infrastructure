@@ -32,7 +32,7 @@ resource "aws_alb_listener" "https" {
 # This fixed response ensures that Googlebot gets a sensible response
 # if it tries to crawl robots.txt, and that it can crawl the images.
 #
-resource "aws_alb_listener_rule" "robots_is_404" {
+resource "aws_lb_listener_rule" "robots_is_404" {
   listener_arn = aws_alb_listener.https.arn
 
   action {
@@ -45,12 +45,13 @@ resource "aws_alb_listener_rule" "robots_is_404" {
   }
 
   condition {
-    field  = "path-pattern"
-    values = ["/robots.txt"]
+    path_pattern {
+      values = ["/robots.txt"]
+    }
   }
 }
 
-resource "aws_alb_listener_rule" "https" {
+resource "aws_lb_listener_rule" "https" {
   listener_arn = aws_alb_listener.https.arn
 
   action {
@@ -59,8 +60,9 @@ resource "aws_alb_listener_rule" "https" {
   }
 
   condition {
-    field  = "path-pattern"
-    values = ["/image/*"]
+    path_pattern {
+      values = ["/image/*"]
+    }
   }
 }
 
