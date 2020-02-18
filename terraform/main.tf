@@ -1,5 +1,5 @@
 module "loris_2020_02_18" {
-  source = "./stack2"
+  source = "./stack"
 
   namespace = "loris-2020-02-18"
 

@@ -1,5 +1,5 @@
 module "cache_cleaner_task" {
-  source = "github.com/wellcomecollection/terraform-aws-ecs-service.git//task_definition/single_container?ref=eaf9312aea0f3a642a830fe5e8eb17251ce8f678"
+  source = "github.com/wellcomecollection/terraform-aws-ecs-service.git//task_definition/single_container?ref=v1.3.0"
 
   task_name  = "${var.namespace}_cache_cleaner"
 

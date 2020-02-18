@@ -12,7 +12,7 @@ locals {
 }
 
 module "task" {
-  source = "github.com/wellcomecollection/terraform-aws-ecs-service.git//task_definition/container_with_sidecar?ref=eaf9312aea0f3a642a830fe5e8eb17251ce8f678"
+  source = "github.com/wellcomecollection/terraform-aws-ecs-service.git//task_definition/container_with_sidecar?ref=v1.3.0"
 
   task_name = var.namespace
 
@@ -48,7 +48,7 @@ module "task" {
 }
 
 module "service" {
-  source = "github.com/wellcomecollection/terraform-aws-ecs-service.git//service?ref=eaf9312aea0f3a642a830fe5e8eb17251ce8f678"
+  source = "github.com/wellcomecollection/terraform-aws-ecs-service.git//service?ref=v1.3.0"
 
   service_name = var.namespace
   cluster_arn  = aws_ecs_cluster.cluster.arn
