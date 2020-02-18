@@ -1,9 +1,15 @@
-module "ecr_nginx_loris_delta" {
-  source = "git::https://github.com/wellcometrust/terraform.git//ecr?ref=v1.0.0"
-  name   = "nginx_loris-delta"
+resource "aws_ecr_repository" "nginx_loris_delta" {
+  name = "uk.ac.wellcome/nginx_loris-delta"
+
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
-module "ecr_loris" {
-  source = "git::https://github.com/wellcometrust/terraform.git//ecr?ref=v1.0.0"
-  name   = "loris"
+resource "aws_ecr_repository" "loris" {
+  name = "uk.ac.wellcome/loris"
+
+  lifecycle {
+    prevent_destroy = true
+  }
 }

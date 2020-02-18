@@ -18,23 +18,23 @@ resource "aws_cloudwatch_metric_alarm" "cloudfront_4xx_alarm" {
   threshold           = "2500"
   treat_missing_data  = "breaching"
 
-  dimensions {
-    DistributionId = "${aws_cloudfront_distribution.loris.id}"
+  dimensions = {
+    DistributionId = aws_cloudfront_distribution.loris.id
     Region         = "Global"
   }
 
   alarm_description = "Monitors 4xx errors from the Loris CloudFront distro"
-  alarm_actions     = ["${aws_sns_topic.cloudfront_errors.arn}"]
+  alarm_actions     = [aws_sns_topic.cloudfront_errors.arn]
 
   // This alarm action is disabled for now (2020-01-15) as it is being noisy
   // and drowning out our other alarms.
   // It should be re-enabled eventually: https://github.com/wellcometrust/platform/issues/4170
   actions_enabled = false
 
-  provider = "aws.us_east_1"
+  provider = aws.us_east_1
 }
 
 resource "aws_sns_topic" "cloudfront_errors" {
   name     = "cloudfront_errors"
-  provider = "aws.us_east_1"
+  provider = aws.us_east_1
 }
