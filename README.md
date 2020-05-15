@@ -6,17 +6,18 @@ This project has the Docker image and infrastructure for our [Loris][loris] depl
 
 [loris]: https://github.com/loris-imageserver/loris
 
-## Updating the installed version of Loris
+## How to update pur Loris image
 
-We install Loris directly from GitHub, rather than a versioned release -- this allows us to deploy fixes immediately.
-What we install is decided by two environment variables in the Dockerfile: `LORIS_GITHUB_USER` and `LORIS_COMMIT`.
-When set, these install Loris from the following URL:
+1.  Edit the `LORIS_GITHUB_USER` and `LORIS_COMMIT` variables [in the Dockerfile](https://github.com/wellcomecollection/loris-infrastructure/blob/master/loris/Dockerfile#L18-L19).
+    This will install Loris from the following URL:
 
-https://github.com/:LORIS_GITHUB_USER/loris/commit/:LORIS_COMMIT
+    https://github.com/:LORIS_GITHUB_USER/loris/commit/:LORIS_COMMIT
 
-Note that `LORIS_GITHUB_USER` should usually be `loris-imageserver` (pointing to the main Loris repo) unless we're temporarily deploying from a fork.
+    Note: `LORIS_GITHUB_USER` should be `loris-imageserver` (the upstream Loris repo) unless we're temporarily deploying from a fork.
 
-Once you've changed these variables, the new version of Loris will be installed the next time you run `make loris-build`.
+2.  Run `make loris-publish` from the root of the repo.
+
+3.  Plan and apply the terraform in the `terraform` directory.
 
 ## Running Loris in development mode
 
