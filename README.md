@@ -6,7 +6,7 @@ This project has the Docker image and infrastructure for our [Loris][loris] depl
 
 [loris]: https://github.com/loris-imageserver/loris
 
-## How to update pur Loris image
+## How to update our Loris image
 
 1.  Edit the `LORIS_GITHUB_USER` and `LORIS_COMMIT` variables [in the Dockerfile](https://github.com/wellcomecollection/loris-infrastructure/blob/master/loris/Dockerfile#L18-L19).
     This will install Loris from the following URL:
