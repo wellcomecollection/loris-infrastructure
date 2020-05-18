@@ -23,4 +23,12 @@ echo "*** Installing Loris itself"
 cd "loris-$LORIS_COMMIT"
 python3 setup.py install
 
+echo "*** Setting up Loris directories"
+# If we run this setup command from bin/ then it uses the installed
+# version of loris rather than the source, which causes errors due to the
+# way it resolves configuration files.
+cp bin/setup_directories.py .
+python3 setup_directories.py
+rm setup_directories.py
+
 apt-get clean
