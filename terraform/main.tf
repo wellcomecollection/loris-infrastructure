@@ -21,7 +21,7 @@ module "loris_2020_02_18" {
   # separately from ECR.  We pin it to a specific release so it can't change
   # under our feet.
   # See: https://github.com/wellcometrust/dockerfiles
-  ebs_cache_cleaner_daemon_image_version = "39"
+  ebs_cache_cleaner_daemon_image_version = "144"
 
   ebs_cache_cleaner_daemon_max_size_in_gb = "160"
   ebs_cache_cleaner_daemon_clean_interval = "1m"
