@@ -25,7 +25,7 @@ locals {
 }
 
 module "sidecar_container" {
-  source = "github.com/wellcomecollection/terraform-aws-ecs-service.git//modules/container_definition?ref=v2.4.1"
+  source = "github.com/wellcomecollection/terraform-aws-ecs-service.git//modules/container_definition?ref=v2.5.0"
 
   name  = "sidecar"
   image = var.sidecar_container_image
@@ -59,7 +59,7 @@ module "sidecar_container" {
 }
 
 module "app_container" {
-  source = "github.com/wellcomecollection/terraform-aws-ecs-service.git//modules/container_definition?ref=v2.4.1"
+  source = "github.com/wellcomecollection/terraform-aws-ecs-service.git//modules/container_definition?ref=v2.5.0"
 
   name  = "app"
   image = var.app_container_image
@@ -89,7 +89,7 @@ module "app_container" {
 }
 
 module "task" {
-  source = "github.com/wellcomecollection/terraform-aws-ecs-service.git//modules/task_definition?ref=v2.5.1"
+  source = "github.com/wellcomecollection/terraform-aws-ecs-service.git//modules/task_definition?ref=v2.5.0"
 
   task_name = var.namespace
   cpu       = var.app_cpu + var.sidecar_cpu
@@ -102,7 +102,7 @@ module "task" {
 
   ebs_volume_name = "ebs"
   ebs_host_path   = "/ebs/loris"
-  bind_mount_volumes = [
+  extra_volumes = [
     {
       name      = local.uwsgi_socket_volume
       host_path = ""
@@ -113,7 +113,7 @@ module "task" {
 }
 
 module "service" {
-  source = "github.com/wellcomecollection/terraform-aws-ecs-service.git//modules/service?ref=v2.4.1"
+  source = "github.com/wellcomecollection/terraform-aws-ecs-service.git//modules/service?ref=v2.5.0"
 
   cluster_arn  = aws_ecs_cluster.cluster.arn
   service_name = var.namespace
