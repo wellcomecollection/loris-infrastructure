@@ -19,15 +19,6 @@ This project has the Docker image and infrastructure for our [Loris][loris] depl
 
 3.  Plan and apply the terraform in the `terraform` directory.
 
-## Running Loris in development mode
-
-Sometimes it can be convenient to test Loris locally, without pushing a new commit to GitHub -- e.g. for testing a code patch, or experimenting with config.
-You can run Loris locally with the following two commands:
-
-    make loris-run
-
-You'll then have a development version of Loris running at <http://localhost:8888>.
-
 ## Testing Loris with nginx
 
 In order to test Loris with its nginx config this project provides a `docker-compose.yml`
@@ -39,12 +30,7 @@ This can be run using (substituting env variables as necessary):
 This starts both loris and nginx (at the tag specified), using the config file specified.
 
 ```sh
-CONFIG_KEY=location/of/config.ini \
-NGINX_TAG=latest \
-AWS_ACCESS_KEY_ID=key_id \
-AWS_SECRET_ACCESS_KEY=access_key \
-docker-compose up
-
+NGINX_TAG=latest docker-compose up
 ```
 
 ### curl localhost:9000
