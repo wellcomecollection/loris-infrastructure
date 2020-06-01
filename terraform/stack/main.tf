@@ -25,7 +25,7 @@ locals {
 }
 
 module "sidecar_container" {
-  source = "github.com/wellcomecollection/terraform-aws-ecs-service.git//modules/container_definition?ref=v2.5.0"
+  source = "github.com/wellcomecollection/terraform-aws-ecs-service.git//modules/container_definition?ref=v2.6.0"
 
   name  = "sidecar"
   image = var.sidecar_container_image
@@ -46,6 +46,13 @@ module "sidecar_container" {
       protocol      = "tcp"
     }
   ]
+  # Increase somaxconn to prevent connections being dropped by the shared socket
+  system_controls = [
+    {
+      namespace = "net.core.somaxconn"
+      value     = "1024"
+    }
+  ]
 
   log_configuration = {
     logDriver = "awslogs"
@@ -59,7 +66,7 @@ module "sidecar_container" {
 }
 
 module "app_container" {
-  source = "github.com/wellcomecollection/terraform-aws-ecs-service.git//modules/container_definition?ref=v2.5.0"
+  source = "github.com/wellcomecollection/terraform-aws-ecs-service.git//modules/container_definition?ref=v2.6.0"
 
   name  = "app"
   image = var.app_container_image
@@ -89,7 +96,7 @@ module "app_container" {
 }
 
 module "task" {
-  source = "github.com/wellcomecollection/terraform-aws-ecs-service.git//modules/task_definition?ref=v2.5.0"
+  source = "github.com/wellcomecollection/terraform-aws-ecs-service.git//modules/task_definition?ref=v2.6.0"
 
   task_name = var.namespace
   cpu       = var.app_cpu + var.sidecar_cpu
@@ -113,7 +120,7 @@ module "task" {
 }
 
 module "service" {
-  source = "github.com/wellcomecollection/terraform-aws-ecs-service.git//modules/service?ref=v2.5.0"
+  source = "github.com/wellcomecollection/terraform-aws-ecs-service.git//modules/service?ref=v2.6.0"
 
   cluster_arn  = aws_ecs_cluster.cluster.arn
   service_name = var.namespace
