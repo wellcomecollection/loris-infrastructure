@@ -1,8 +1,19 @@
-app:
-  build: .
-  ports:
-   - "8888:8888"
-nginx:
-  image: "nginx_loris:${NGINX_TAG}"
-  ports:
-   - "9000:9000"
+version: "3"
+
+services:
+  app:
+    build: ./loris
+    image: loris
+    volumes:
+      - uwsgi_sock_dir:/var/run/uwsgi
+  nginx:
+    # You will probably want to build a local version of this image
+    # which disables the HTTPS redirection logic
+    image: "nginx_loris:${NGINX_TAG:-latest}"
+    ports:
+     - "9000:9000"
+    volumes:
+     - uwsgi_sock_dir:/var/run/uwsgi
+
+volumes:
+  uwsgi_sock_dir:
