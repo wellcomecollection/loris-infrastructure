@@ -3,7 +3,7 @@ data "aws_ssm_parameter" "loris_release" {
 }
 
 data "aws_ssm_parameter" "loris_nginx_release" {
-  name = "/loris/images/latest/nginx_loris-delta"
+  name = "/platform/images/latest/nginx_loris"
 }
 
 locals {
