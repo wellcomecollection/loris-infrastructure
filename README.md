@@ -1,8 +1,16 @@
 # Loris
 
-This project has the Docker image and infrastructure for our [Loris][loris] deployment.
+**Deprecation notice**
 
-[![Build Status](https://travis-ci.org/wellcomecollection/loris-infrastructure.svg?branch=master)](https://travis-ci.org/wellcomecollection/loris-infrastructure)
+As of 3/3/2021 Wellcome Collection no longer run an instance of Loris to serve our IIIF image API.
+
+We currently use https://dlcs.info/ to serve the content previously hosted by Loris.
+
+This repository is archived for reference.
+
+---
+
+This project held the Docker image and infrastructure for our [Loris][loris] deployment.
 
 [loris]: https://github.com/loris-imageserver/loris
 
