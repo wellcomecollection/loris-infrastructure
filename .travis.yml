@@ -9,7 +9,7 @@ dist: "trusty"
 
 branches:
   only:
-    - "master"
+    - "main"
 
 script:
   - ./run_travis.sh
