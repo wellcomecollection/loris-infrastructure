@@ -2,17 +2,15 @@
 
 **Deprecation notice**
 
-As of 3/3/2021 Wellcome Collection no longer run an instance of Loris to serve our IIIF image API.
+As of March 2021, Wellcome Collection no longer run an instance of Loris to serve our IIIF image API.
 
-We currently use https://dlcs.info/ to serve the content previously hosted by Loris.
+We are using https://dlcs.info/ to serve the content previously hosted by Loris.
 
-This repository is archived for reference.
+This repository contains the Docker image definitions and infrastructure for our [Loris] deployment.
+
+[Loris]: https://github.com/loris-imageserver/loris
 
 ---
-
-This project held the Docker image and infrastructure for our [Loris][loris] deployment.
-
-[loris]: https://github.com/loris-imageserver/loris
 
 ## How to update our Loris image
 
